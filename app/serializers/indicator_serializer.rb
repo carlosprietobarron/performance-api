@@ -1,4 +1,4 @@
 class IndicatorSerializer
   include JSONAPI::Serializer
-  attributes 
+  attributes :id, :name, :goal
 end
