@@ -15,4 +15,4 @@
 
   Indicator.create(name:"Demo Meeting", goal:5)
 
-  Indicator.create(name:"Qoutes Issued", goal:20)
+  Indicator.create(name:"Qoutes Issued", goal:20)AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

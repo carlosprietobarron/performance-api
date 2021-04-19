@@ -1,4 +1,4 @@
-class MeasuresController < ApplicationController
+class MeasuresController < ApiController
     def create
         measure = Measure.new(measure_params)
         if measure.valid?

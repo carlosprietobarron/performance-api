@@ -1,4 +1,4 @@
-class IndicatorsController < ApplicationController
+class IndicatorsController < ApiController
   def index
     @indicators = Indicator.all
 

@@ -32,6 +32,18 @@ gem 'jsom-pagination'
 gem 'jsonapi_errors_handler'
 gem 'rack-cors'
 
+#active admin
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'devise'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
+
+gem 'webpacker'
+
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
