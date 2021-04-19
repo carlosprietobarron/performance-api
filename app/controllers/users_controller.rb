@@ -1,14 +1,15 @@
-class UsersController < ApiController
+class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
 
-      if @user.valid?
-        @user.save 
-        render json: @user, status: :ok
-
+      if @user.save && @user.valid? 
+        token = encode_token({
+          user_id: @user.id,
+          exp: 30.days.from_now.to_i
+        })
+        render json: {user: @user, token: token}, status: :created
       else
-        status = {"422" => "Unprocessable_entity"}
-        render :json => [ @user, status ]
+        render json: {error: "Invalid username or password"}, status: :unauthorized
       end
     end
 

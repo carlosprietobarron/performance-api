@@ -23,7 +23,7 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # serializes for api
-gem 'jsonapi-serializer'
+# gem 'jsonapi-serializer'
 
 #pagination
 gem 'jsom-pagination'
@@ -34,6 +34,9 @@ gem 'rack-cors'
 
 #active admin
 gem 'activeadmin'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+gem 'active_model_serializers'
 
 # Plus integrations with:
 gem 'devise'
