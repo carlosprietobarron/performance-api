@@ -1,4 +1,6 @@
-class UsersController < ApplicationController
+class UsersController < PermissionController
+  skip_before_action :authorized, only: [:create]
+
     def create
       @user = User.new(user_params)
 
@@ -26,6 +28,7 @@ class UsersController < ApplicationController
          render json: [{"error": "Not Authorized"}, status: :unauthorized]
        end 
     end
+    
 private
 
     def user_params
