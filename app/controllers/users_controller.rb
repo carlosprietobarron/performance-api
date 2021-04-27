@@ -28,16 +28,16 @@ class UsersController < PermissionController
          render json: [{"error": "Not Authorized"}, status: :unauthorized]
        end 
     end
-    
+
 private
 
     def user_params
-        params.require(:data).require(:attributes).permit(:name, :email ,:password )
+        params.require(:data).require(:attributes).permit(:name, :email ,:password_digest )
     end
 
     def user_valid_password?(email, pwd)
         @user = User.find_by(email: email)
-        return true if @user.password === pwd
+        return true if @user.password_digest === pwd
         false
     end
 end
