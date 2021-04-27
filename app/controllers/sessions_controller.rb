@@ -4,7 +4,7 @@ class SessionsController < PermissionController
     def login
       @user = User.find_by(name: params[:name])
       puts @user.name
-      if @user && @user.authenticate(params[:password])
+      if @user && @user.authenticate(params[:password_digest])
         token = encode_token({
           user_id: @user.id,
           exp: 30.days.from_now.to_i
