@@ -1,10 +1,14 @@
 class SessionsController < PermissionController
     before_action :authorized, only: [:auto_login]
+    skip_before_action :authorized, only: [:login]
 
     def login
-      @user = User.find_by(name: params[:name])
-      puts @user.name
-      if @user && @user.authenticate(params[:password_digest])
+      puts params 
+      @user = User.find_by(name: params[:name]) 
+       
+      puts "user name #{@user.name}"
+      if @user && @user.authenticate(params[:password])
+        puts "authenticated"
         token = encode_token({
           user_id: @user.id,
           exp: 30.days.from_now.to_i
