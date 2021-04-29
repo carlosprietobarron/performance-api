@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :indicators, only: [:index, :show]
+  resources :indicators, only: [:index, :create]
   resources :measures, only: [:create ]
   resources :users, only: [:create]
   post "/login", to: "sessions#login"

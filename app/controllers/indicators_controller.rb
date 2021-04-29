@@ -11,12 +11,7 @@ class IndicatorsController < PermissionController
     @indicators_serial = serializer.new(@indicators)
     @filtered_ind = []
 
-    # @indicators.each do |item|
-
-    #   for i in 10.times
-    #   end
-    # end
-    
+        
     render json: {
       loggedIn: true,
       result: JSON.parse(@indicators_json),
@@ -28,6 +23,21 @@ class IndicatorsController < PermissionController
     @indicator = Indicator.find_by(id: params["id"])
     render json: serializer.new(@indicator)
   end
+
+  def create
+    @indicator = Indicator.new(
+      name: params[:name],
+      goal: params[:goal],
+      image: "../public/assets/uconstruction.jpg"
+    )
+
+    if @indicator.save
+      render json: @indicator, status: :created
+    else
+      render json: {message: 'Indicator not created'}, status: :unprocessable_entity
+    end
+  end
+  
 
   def measures
     @indicator = Indicator.find_by(id: params["id"])
