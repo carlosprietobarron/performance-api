@@ -1,8 +1,27 @@
-class IndicatorsController < ApiController
+require "json"
+class IndicatorsController < PermissionController
+  before_action :authorized
+
   def index
     @indicators = Indicator.all
+    @indicators_json = @indicators.to_json(
+      :include => {:measures => {:only =>[:day, :measure, :comentary]}},
+      :except => [:created_at, :updated_at]
+    )
+    @indicators_serial = serializer.new(@indicators)
+    @filtered_ind = []
 
-    render json: serializer.new(@indicators)
+    # @indicators.each do |item|
+
+    #   for i in 10.times
+    #   end
+    # end
+    
+    render json: {
+      loggedIn: true,
+      result: JSON.parse(@indicators_json),
+      message: 'Successfully retrieved Top Tens'
+    }, adapter: :json
   end
 
   def show
@@ -18,7 +37,7 @@ class IndicatorsController < ApiController
     render json: @measures , status: :ok
   end
 
-  def serializer 
+  def serializer
     IndicatorSerializer
   end
 end

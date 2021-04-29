@@ -1,4 +1,5 @@
-class MeasureSerializer
-  include JSONAPI::Serializer
-  attributes 
+class MeasureSerializer < ActiveModel::Serializer
+  attributes :id, :measure, :day, :comentary
+
+  belongs_to :indicator
 end
