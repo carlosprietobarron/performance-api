@@ -1,21 +1,24 @@
-class MeasuresController < ApiController
+class MeasuresController < PermissionController
+  before_action :authorized
+    
     def create
-        measure = Measure.new(measure_params)
-        if measure.valid?
-            measure.save!
-            render json: measure, status: :ok
+        @measure = Measure.new(
+            day: params[:day],
+            measure: params[:measure],
+            comentary: params[:comentary],
+            indicator_id: params[:indicator_id]
+        )
+        p @measure
+        if @measure.valid?
+            p @measure
+            @measure.save!
+            render json: @measure, status: :ok
         else
             #return error
             status = {"422" => "Unprocessable_entity"}
-        render :json => [ measure, status ]
+        render :json => [ @measure, status ]
         end
         
     end 
-
-    def indicatorMeasures
-    end
-
-    def measure_params
-        params.require(:data).require(:attributes).permit(:measure, :day, :indicator_id)
-    end
+    
 end

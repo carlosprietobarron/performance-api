@@ -15,13 +15,23 @@ class IndicatorsController < PermissionController
     render json: {
       loggedIn: true,
       result: JSON.parse(@indicators_json),
-      message: 'Successfully retrieved Top Tens'
+      message: 'Successfully retrieved Indicators'
     }, adapter: :json
   end
 
   def show
     @indicator = Indicator.find_by(id: params["id"])
-    render json: serializer.new(@indicator)
+    @indicator_json = @indicator.to_json(
+      :include => {:measures => {:only =>[:day, :measure, :comentary]}},
+      :except => [:created_at, :updated_at]
+    )
+    @indicators_serial = serializer.new(@indicators)
+    @filtered_ind = []
+    render json: {
+      loggedIn: true,
+      result: JSON.parse(@indicator_json),
+      message: 'Successfully retrieved Indicators'
+    }, adapter: :json
   end
 
   def create
