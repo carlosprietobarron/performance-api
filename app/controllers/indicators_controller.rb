@@ -30,19 +30,29 @@ class IndicatorsController < PermissionController
     render json: {
       loggedIn: true,
       result: JSON.parse(@indicator_json),
-      message: 'Successfully retrieved Indicators'
+      message: 'Successfully retrieved Indicator'
     }, adapter: :json
   end
 
   def create
+    puts "params"
+    puts params
     @indicator = Indicator.new(
       name: params[:name],
       goal: params[:goal],
-      image: "../public/assets/uconstruction.jpg"
+      description: params[:description],
+      image: "https://i.ibb.co/2vgCGV5/uconstruction.jpg"
     )
 
     if @indicator.save
-      render json: @indicator, status: :created
+      @indicator_json = @indicator.to_json()
+      @indicators_serial = serializer.new(@indicators)
+      render json: {
+        loggedIn: true,
+        result: JSON.parse(@indicator_json),
+        message: 'Successfully created Indicator',
+        status: "created",
+      }, adapter: :json
     else
       render json: {message: 'Indicator not created'}, status: :unprocessable_entity
     end
