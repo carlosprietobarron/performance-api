@@ -21,4 +21,5 @@ class MeasuresController < PermissionController
         
     end 
     
+    # Ex:- scope :active, lambda {where(:active => true)}
 end
