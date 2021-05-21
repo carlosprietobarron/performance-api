@@ -4,5 +4,5 @@ class Measure < ApplicationRecord
     belongs_to :indicator
     
     #default_scope { where(day: >= (Date.today - 5))}
-    default_scope -> { where ("day >=  '#{Date.today - 15}'")}
+    default_scope -> { where ("day >=  '#{Date.today - 60}'")}
 end
