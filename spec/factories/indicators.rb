@@ -6,4 +6,5 @@ FactoryBot.define do
     description { "some description" }
     
   end
+
 end

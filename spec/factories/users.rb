@@ -1,9 +1,7 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    name { "MyString" }
-    email { "MyString" }
-    password { "MyString" }
-    role { "MyString" }
-  end
+    name { "carlos" }
+    email { "carlos@gmail.com" }
+    password { "password" }
+    end
 end
