@@ -11,13 +11,11 @@ RSpec.describe Indicator, type: :model do
     end
   
     it "validates name must be present" do
-      # indicator = build(:indicator, name: 'indicator test', goal: 0)
       expect(indicator).to be_valid
     end
   
     it "validates null name are not valid" do
       indicator.name = ''
-      #indicator = build(:indicator, name: '', goal: 0)
       expect(indicator).not_to be_valid
     end
 

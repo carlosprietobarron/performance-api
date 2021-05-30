@@ -10,26 +10,38 @@ class UsersController < PermissionController
       password:params['password'],
       password_confirmation:params['password_confirmation']
     )
-      
-    if @user.save && @user.valid? 
-      token = encode_token({
-        user_id: @user.id,
-        exp: 30.days.from_now.to_i
-      })
-      render json: {
-        user: @user, 
-        token: token,
-        status: 201,
-        message: 'Log in successful'
-      } 
-    else
+    
+    if (params['password'] != params['password_confirmation'] ) 
       render json: {
         user: [],
         token: '',
         status: 401,
-        message: "Failed to sign up, please try again"
-      }
+        message: "Failed to sign up, please confirm password"
+    }
+    return
     end
+
+
+      if @user.save && @user.valid? 
+        token = encode_token({
+          user_id: @user.id,
+          exp: 30.days.from_now.to_i
+        })
+        render json: {
+          user: @user, 
+          token: token,
+          status: 201,
+          message: 'Log in successful'
+        } 
+      else
+        render json: {
+          user: [],
+          token: '',
+          status: 401,
+          message: "Failed to sign up, please try again"
+        }
+      end
+  
   end
 private
 
