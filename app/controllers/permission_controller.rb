@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
+# rubocop:disable Style/Documentation, Style/GuardClause
 class PermissionController < ApplicationController
   before_action :authorized
   protect_from_forgery with: :null_session
 
   def encode_token(payload)
-    JWT.encode(payload,'yourSecret')
+    JWT.encode(payload, 'yourSecret')
   end
 
   def auth_header
@@ -15,7 +18,7 @@ class PermissionController < ApplicationController
       token = auth_header.split(' ')[1]
 
       begin
-        JWT.decode(token,'yourSecret',true,algorithm: 'HS256')
+        JWT.decode(token, 'yourSecret', true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
@@ -34,6 +37,7 @@ class PermissionController < ApplicationController
   end
 
   def authorized
-    render json: { loggedIn: false ,message: 'Please log in'} unless logged_in?
+    render json: { loggedIn: false, message: 'Please log in' } unless logged_in?
   end
 end
+# rubocop:enable Style/Documentation, Style/GuardClause

@@ -1,5 +1,7 @@
-class Indicator < ApplicationRecord
-    validates :name, presence: true
+# frozen_string_literal: true
 
-    has_many :measures
+class Indicator < ApplicationRecord
+  validates :name, presence: true
+
+  has_many :measures
 end

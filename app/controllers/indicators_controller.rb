@@ -1,17 +1,19 @@
-require "json"
+# frozen_string_literal: true
+
+# rubocop:disable Style/Documentation, Metrics/MethodLength, Metrics/AbcSize
+require 'json'
 class IndicatorsController < PermissionController
   before_action :authorized
 
   def index
     @indicators = Indicator.all
     @indicators_json = @indicators.to_json(
-      :include => {:measures => {:only =>[:day, :measure, :comentary]}},
-      :except => [:created_at, :updated_at]
+      include: { measures: { only: %i[day measure comentary] } },
+      except: %i[created_at updated_at]
     )
     @indicators_serial = serializer.new(@indicators)
     @filtered_ind = []
 
-        
     render json: {
       loggedIn: true,
       result: JSON.parse(@indicators_json),
@@ -20,10 +22,10 @@ class IndicatorsController < PermissionController
   end
 
   def show
-    @indicator = Indicator.find_by(id: params["id"])
+    @indicator = Indicator.find_by(id: params['id'])
     @indicator_json = @indicator.to_json(
-      :include => {:measures => {:only =>[:day, :measure, :comentary]}},
-      :except => [:created_at, :updated_at]
+      include: { measures: { only: %i[day measure comentary] } },
+      except: %i[created_at updated_at]
     )
     @indicators_serial = serializer.new(@indicators)
     @filtered_ind = []
@@ -35,39 +37,39 @@ class IndicatorsController < PermissionController
   end
 
   def create
-    puts "params"
+    puts 'params'
     puts params
     @indicator = Indicator.new(
       name: params[:name],
       goal: params[:goal],
       description: params[:description],
-      image: "https://i.ibb.co/2vgCGV5/uconstruction.jpg"
+      image: 'https://i.ibb.co/2vgCGV5/uconstruction.jpg'
     )
 
     if @indicator.save
-      @indicator_json = @indicator.to_json()
+      @indicator_json = @indicator.to_json
       @indicators_serial = serializer.new(@indicators)
       render json: {
         loggedIn: true,
         result: JSON.parse(@indicator_json),
         message: 'Successfully created Indicator',
-        status: "created",
+        status: 'created'
       }, adapter: :json
     else
-      render json: {message: 'Indicator not created'}, status: :unprocessable_entity
+      render json: { message: 'Indicator not created' }, status: :unprocessable_entity
     end
   end
-  
 
   def measures
-    @indicator = Indicator.find_by(id: params["id"])
-    #measures = @indicator.measures
+    @indicator = Indicator.find_by(id: params['id'])
+    # measures = @indicator.measures
     @measures = Measure.where(indicator_id: @indicator.id)
-    
-    render json: @measures , status: :ok
+
+    render json: @measures, status: :ok
   end
 
   def serializer
     IndicatorSerializer
   end
 end
+# rubocop:enable Style/Documentation, Metrics/MethodLength, Metrics/AbcSize

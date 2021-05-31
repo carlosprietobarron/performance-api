@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :indicator do
-    name {"indicator test"}
+    name { 'indicator test' }
     goal { 20 }
-    image { "some url" } 
-    description { "some description" }
-    
+    image { 'some url' }
+    description { 'some description' }
   end
-
 end
