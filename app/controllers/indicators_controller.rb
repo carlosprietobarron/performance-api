@@ -60,14 +60,6 @@ class IndicatorsController < PermissionController
     end
   end
 
-  def measures
-    @indicator = Indicator.find_by(id: params['id'])
-    # measures = @indicator.measures
-    @measures = Measure.where(indicator_id: @indicator.id)
-
-    render json: @measures, status: :ok
-  end
-
   def serializer
     IndicatorSerializer
   end

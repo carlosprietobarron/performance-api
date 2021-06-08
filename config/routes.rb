@@ -10,8 +10,5 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#login'
   get '/auto_login', to: 'sessions#auto_login'
 
-  # get '/indicators/:id/measures', to: 'indicators#measures', as: 'measurecol'
-  # get '/users/login/', to: 'users#signin'
-
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
