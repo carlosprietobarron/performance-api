@@ -3,5 +3,5 @@
 class MeasureSerializer < ActiveModel::Serializer
   attributes :id, :measure, :day, :comentary
 
-  belongs_to :indicator
+#  belongs_to :indicator
 end
