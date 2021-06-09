@@ -13,17 +13,22 @@
 To create user you can use the endpoint: POST :  https://gentle-shore-76199.herokuapp.com/users 
 
 using the following json data :
+```
 data = {
       name: username,
       email: email,
       password: password,
       password_confirmation: passwordConfirmation
     }
+```
 
-The call shall be made as the following example using axios:  axios. post(`https://gentle-shore-76199.herokuapp.com/users`, data)
+The call shall be made as the following example using axios:  
+
+post(`https://gentle-shore-76199.herokuapp.com/users`, data)
 
 If the request is successful it will respond with a json formmated resposen like the following:
 
+```
 {
     "user": {
         "id": 4,
@@ -38,21 +43,28 @@ If the request is successful it will respond with a json formmated resposen like
     "status": 201,
     "message": "Log in successful"
 }
+```
 
 Which incliude the status and the created token for the user session.
 
 ## Login control
 
-To Login the user to the API app you can use the following request:  POST :  https://gentle-shore-76199.herokuapp.com/users 
+To Login the user to the API app you can use the following request:  
+
+post(`https://gentle-shore-76199.herokuapp.com/login`, data)
 
 using the following json data :
+
+```
 data = {
       name: username,
       password: password,
       }
+```
 
 If the request is successful it will respond with a json formmated resposen like the following:
 
+```
 {
     "user": {
         "id": 4,
@@ -66,8 +78,10 @@ If the request is successful it will respond with a json formmated resposen like
     "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE2MjU2NzgyOTZ9.H8ngm_52Mht3sQkY59dfWXHMORPn3Yr02YeObSU-cNw",
     "status": "created"
 }
+```
 
 Which include the status and the created token for the user newlly created session.
+
 
 
 ## Create new Indicators
@@ -75,22 +89,26 @@ Which include the status and the created token for the user newlly created sessi
 Each person has it's own goals and objectives and the performance indicator best for him, thus you must be able
 to create your own success metrics and indicators.  The way to do this is using the next endpoint:
 
-POST 'http://hosturl//indicators', data, {
+POST(`http://hosturl//indicators`, data, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-    }
+    })
 
 with the following data body:
 
+```
 {
     "name": "demo indicator",
     "goal": "5",
     "description": "this ia a demo indicator"
 }
+```
+
 
 If Succeed The API will send the following response to the given request:
 
+```
 {
     "loggedIn": true,
     "result": {
@@ -105,6 +123,7 @@ If Succeed The API will send the following response to the given request:
     "message": "Successfully created Indicator",
     "status": "created"
 }
+```
 
 ## Create a masure for an indicator.
 
@@ -120,14 +139,17 @@ POST `http://hosturl/indicators/${indicator id}/measures`, data, {
 
 where the data object is defined as follows:
 
+```
  {
     "day": "03-06-2021",
     "measure": "15",
     "comentary": "Testing with may"
 }
+```
 
 And the response would be:
 
+```
 {
     "id": 18,
     "measure": 15,
@@ -141,19 +163,21 @@ And the response would be:
         "image": null,
     }
 }
+```
 
 ## Retrieve the Indicators along with a year of measure to create chart
 
 To retrieve the indicators with the data of measures in order to create charts you can use
 
-GET : 'http://localhost:3000/indicators', {
+GET : `http://localhost:3000/indicators`, {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': `application/json`,
       Authorization: `Bearer ${token}`,
     }
 
 that will return the following data:
 
+```
 {
     "loggedIn": true,
     "result": [
@@ -211,6 +235,10 @@ that will return the following data:
                 },
             ]
         },
+    }    
+}
+```
+
 
 ## Author
 
