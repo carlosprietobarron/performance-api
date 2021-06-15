@@ -147,5 +147,5 @@ Measure.create(day: "25-04-2021", measure: "2", comentary: "feeded test data", i
 
 
 AdminUser.create!(email: 'admin@example.com', password: 'password',
-Mesure                    password_confirmation: 'password')
+                    password_confirmation: 'password')
 
