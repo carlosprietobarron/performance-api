@@ -146,6 +146,6 @@ Measure.create(day: "24-04-2021", measure: "21", comentary: "feeded test data", 
 Measure.create(day: "25-04-2021", measure: "2", comentary: "feeded test data", indicator_id: "5")
 
 
-# AdminUser.create!(email: 'admin@example.com', password: 'password',
-#Mesure                    password_confirmation: 'password')
+AdminUser.create!(email: 'admin@example.com', password: 'password',
+Mesure                    password_confirmation: 'password')
 
