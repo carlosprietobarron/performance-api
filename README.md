@@ -1,12 +1,45 @@
-## Built With
+# PERFORMANCE TRACKING API
+> This is the Front-End application for the PERFORMANCE TRACKING system.
 
-- React
-- Redux
-- Javascript
-- CSS
+## Screen shot
+![screenshot](./screenshot.png)
+
+## Live Demo
+
+[API Preformance tracking ON HEROKU](https://gentle-shore-76199.herokuapp.com/)#
+
+# Built With
+
+- Ruby on Rails
+- Devise
+- JWT
+- Postgress
 
 
 # API USER GUIDE
+
+## To install it locally
+
+Clone  this repository or download the zip version to your local disk and extract it.
+
+Run the command
+
+``` bundle ```
+
+Then you must create the database with:
+
+``` rails db:create ```
+
+following you should run the migrations to create the tables.
+
+``` rails db:migrate ```
+
+At the end you should run the following command to run the API service.
+
+``` rails server ```
+
+After the service is up, you could create your own aplication front end, or use 
+the one provider in the repository: "https://github.com/carlosprietobarron/perform-ui"
 
 ## User creation and login endpoints
 
