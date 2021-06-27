@@ -1,21 +1,28 @@
-class MeasuresController < ApplicationController
-    def create
-        measure = Measure.new(measure_params)
-        if measure.valid?
-            measure.save!
-            render json: measure, status: :ok
-        else
-            #return error
-            status = {"422" => "Unprocessable_entity"}
-        render :json => [ measure, status ]
-        end
-        
-    end 
+# frozen_string_literal: true
 
-    def indicatorMeasures
-    end
+# rubocop:disable Style/Documentation, Metrics/MethodLength
+class MeasuresController < PermissionController
+  before_action :authorized
 
-    def measure_params
-        params.require(:data).require(:attributes).permit(:measure, :day, :indicator_id)
+  def create
+    @measure = Measure.new(
+      day: params[:day],
+      measure: params[:measure],
+      comentary: params[:comentary],
+      indicator_id: params[:indicator_id]
+    )
+    p @measure
+    if @measure.valid?
+      p @measure
+      @measure.save!
+      render json: @measure, status: :ok
+    else
+      # return error
+      status = { '422' => 'Unprocessable_entity' }
+      render json: [@measure, status]
     end
+  end
+
+  # Ex:- scope :active, lambda {where(:active => true)}
 end
+# rubocop:enable Style/Documentation, Metrics/MethodLength

@@ -1,5 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :indicators, only: [:index]
-  resources :measures, only: [:create ]
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  resources :indicators, only: %i[index create show] do
+    resources :measures, only: [:create]
+  end
+  resources :users, only: [:create]
+  post '/login', to: 'sessions#login'
+  get '/auto_login', to: 'sessions#auto_login'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
